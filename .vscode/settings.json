@@ -1,0 +1,7 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "C:\\Users\\Jake\\.virtualenvs\\new_code-U7zesG0V\\Scripts\\python.exe",
+    "python.formatting.provider": "black"
+}
