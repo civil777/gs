@@ -4,7 +4,7 @@ from django.db import models
 
 class User(AbstractUser):
 
-    """ User Model """
+    """ Custom User Model """
 
     GENDER_MALE = "male"
     GENDER_FEMALE = "female"
@@ -35,11 +35,9 @@ class User(AbstractUser):
     )
 
     기타사항 = models.TextField(default="", blank=True)
-    프로필_사진 = models.ImageField(null=True, blank=True)
-    성별 = models.CharField(choices=GENDER_CHOICES, max_length=10, null=True, blank=True)
-    생일 = models.DateField(null=True)
-    language = models.CharField(
-        choices=LANGUAGE_CHOICES, max_length=7, null=True, blank=True
-    )
-    통화 = models.CharField(choices=CURRENCY_CHOICES, max_length=7, null=True, blank=True)
+    프로필_사진 = models.ImageField(blank=True)
+    성별 = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
+    생일 = models.DateField(blank=True, null=True)
+    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=7, blank=True)
+    통화 = models.CharField(choices=CURRENCY_CHOICES, max_length=7, blank=True)
     할인_혜택_회원 = models.BooleanField(default=False)
