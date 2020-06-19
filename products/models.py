@@ -4,6 +4,24 @@ from core import models as core_models
 from users import models as user_models
 
 
+class AbstracItem(core_models.TimeStampedModel):
+
+    """ Abstract Item """
+
+    name = models.CharField(max_length=80)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class ProductType(AbstracItem):
+
+    pass
+
+
 class Product(core_models.TimeStampedModel):
 
     """ Product Model Definition """
@@ -22,3 +40,7 @@ class Product(core_models.TimeStampedModel):
     생산날짜 = models.TimeField()
     유통기한 = models.TimeField()
     생산자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
+    제품_종류 = models.ManyToManyField(ProductType, blank=True)
+
+    def __str__(self):
+        return self.제품이름
