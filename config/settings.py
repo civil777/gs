@@ -38,10 +38,15 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "django_countries",
+]
 
 PROJECT_APPS = [
     "users.apps.UsersConfig",
+    "agricultural_products.apps.AgriculturalProductsConfig",
+    "products.apps.ProductsConfig",
+    "core.apps.CoreConfig",
 ]
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 
