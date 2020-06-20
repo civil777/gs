@@ -4,7 +4,7 @@ from core import models as core_models
 from users import models as user_models
 
 
-class AbstracItem(core_models.TimeStampedModel):
+class AbstractItem(core_models.TimeStampedModel):
 
     """ Abstract Item """
 
@@ -17,9 +17,22 @@ class AbstracItem(core_models.TimeStampedModel):
         return self.name
 
 
-class ProductType(AbstracItem):
+class ProductType(AbstractItem):
+
+    """ ProductType Model Definition """
+
+    class Meta:
+        verbose_name = "Product Type"
+
+
+class Facility(AbstractItem):
+
+    """ Facility Model Definition """
 
     pass
+
+    class Meta:
+        verbose_name_plural = "Facilities"
 
 
 class Photo(core_models.TimeStampedModel):
@@ -52,7 +65,15 @@ class Product(core_models.TimeStampedModel):
     생산날짜 = models.TimeField()
     유통기한 = models.TimeField()
     생산자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    제품_종류 = models.ManyToManyField(ProductType, blank=True)
+    # 제품_종류 = models.ManyToManyField(ProductType, blank=True)
+    제품_종류 = models.ForeignKey(
+        "ProductType",
+        related_name="products",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    facilities = models.ManyToManyField("Facility", related_name="products", blank=True)
 
     def __str__(self):
         return self.제품이름
