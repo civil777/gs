@@ -22,6 +22,18 @@ class ProductType(AbstracItem):
     pass
 
 
+class Photo(core_models.TimeStampedModel):
+
+    """ Photo Model Definition """
+
+    caption = models.CharField(max_length=150)
+    file = models.ImageField()
+    product = models.ForeignKey("Product", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.caption
+
+
 class Product(core_models.TimeStampedModel):
 
     """ Product Model Definition """
