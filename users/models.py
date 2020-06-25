@@ -41,3 +41,4 @@ class User(AbstractUser):
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=7, blank=True)
     통화 = models.CharField(choices=CURRENCY_CHOICES, max_length=7, blank=True)
     할인_혜택_회원 = models.BooleanField(default=False)
+    판매자 = models.BooleanField(default=False)

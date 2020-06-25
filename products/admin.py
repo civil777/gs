@@ -78,6 +78,7 @@ class ProductAdmin(admin.ModelAdmin):
         "유통기한",
         "생산자",
         "제품_종류",
+        "total_rating",
     )
 
     list_filter = (

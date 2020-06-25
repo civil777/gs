@@ -16,3 +16,9 @@ class Review(core_models.TimeStampedModel):
 
     def __str__(self):
         return f"{self.review} - {self.product.제품이름}"
+
+    def rating_average(self):
+        avg = (self.품직 + self.배송 + self.가격 + self.신선도) / 4
+        return round(avg, 2)
+
+    rating_average.short_description = "Avg."
