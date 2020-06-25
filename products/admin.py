@@ -28,6 +28,7 @@
 #     pass
 
 from django.contrib import admin
+from django.utils.html import mark_safe
 from . import models
 
 
@@ -42,6 +43,11 @@ class ItemAdmin(admin.ModelAdmin):
         return obj.products.count()
 
     pass
+
+
+class PhotoInline(admin.TabularInline):
+
+    model = models.Photo
 
 
 @admin.register(models.Product)
@@ -60,7 +66,7 @@ class ProductAdmin(admin.ModelAdmin):
             "More About the Space",
             {"classes": ("collapse",), "fields": ("제품_종류", "facilities",),},
         ),
-        ("Last Details", {"fields": ("생산자",)}),
+        ("Last Details", {"fields": ("판매자",)}),
     )
 
     list_display = (
@@ -94,10 +100,12 @@ class ProductAdmin(admin.ModelAdmin):
 
     search_fields = (
         "=도로명_주소",
-        "^생산자__username",
+        "^판매자__username",
         "제품이름",
     )
 
+    raw_id_fields = ("판매자",)
+    search_fields = ("=도로명_주소", "^판매자__username")
     filter_horizontal = ("facilities",)
 
     def count_photos(self, obj):
@@ -107,6 +115,11 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
 
-    """ """
+    """ Phot Admin Definition """
 
-    pass
+    list_display = ("__str__", "get_thumbnail")
+
+    def get_thumbnail(self, obj):
+        return mark_safe(f'<img width="50px" src="{obj.file.url}" />')
+
+    get_thumbnail.short_description = "Thumbnail"

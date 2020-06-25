@@ -35,7 +35,7 @@ class User(AbstractUser):
     )
 
     기타사항 = models.TextField(default="", blank=True)
-    프로필_사진 = models.ImageField(blank=True)
+    프로필_사진 = models.ImageField(upload_to="avatars", blank=True)
     성별 = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     생일 = models.DateField(blank=True, null=True)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=7, blank=True)

@@ -16,3 +16,8 @@ class List(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def count_products(self):
+        return self.products.count()
+
+    count_products.short_description = "Number of Prodcuts"

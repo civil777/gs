@@ -40,7 +40,7 @@ class Photo(core_models.TimeStampedModel):
     """ Photo Model Definition """
 
     caption = models.CharField(max_length=150)
-    file = models.ImageField()
+    file = models.ImageField(upload_to="product_photos")
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -64,6 +64,7 @@ class Product(core_models.TimeStampedModel):
     무료배송 = models.BooleanField(default=False)
     생산날짜 = models.TimeField()
     유통기한 = models.TimeField()
+    판매자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
     생산자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
     # 제품_종류 = models.ManyToManyField(ProductType, blank=True)
     제품_종류 = models.ForeignKey(
