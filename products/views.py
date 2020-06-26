@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from . import models
 
 
-def all_products(request):
-    return render(request, "all_products.html")
+class HomeView(ListView):
+
+    """ HomeView Definition """
+
+    model = models.Product

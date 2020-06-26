@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}
+{{product.name}}
+{% endblock page_title %}
+
+{% block content %}
+<div>
+    <h1>{{product.제품이름}}</h1>
+    <h3>{{product.설명}}</h3>
+</div>
+<div>
+    <h2>By: {{product.host.username}}
+        {% if product.생산자.무료배송 %}
+        (무료배송)
+        {% endif %}
+    </h2>
+    <h3>Facilities</h3>
+    <ul>
+        {% for a in product.facilities.all  %}
+        <li>{{a}}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}
