@@ -64,7 +64,7 @@ class Product(core_models.TimeStampedModel):
     무료배송 = models.BooleanField(default=False)
     생산날짜 = models.TimeField()
     유통기한 = models.TimeField()
-    판매자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
+    # 판매자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
     생산자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
     # 제품_종류 = models.ManyToManyField(ProductType, blank=True)
     제품_종류 = models.ForeignKey(

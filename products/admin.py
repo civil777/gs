@@ -66,7 +66,7 @@ class ProductAdmin(admin.ModelAdmin):
             "More About the Space",
             {"classes": ("collapse",), "fields": ("제품_종류", "facilities",),},
         ),
-        ("Last Details", {"fields": ("판매자",)}),
+        ("Last Details", {"fields": ("생산자",)}),
     )
 
     list_display = (
@@ -100,12 +100,12 @@ class ProductAdmin(admin.ModelAdmin):
 
     search_fields = (
         "=도로명_주소",
-        "^판매자__username",
+        "^생산자__username",
         "제품이름",
     )
 
-    raw_id_fields = ("판매자",)
-    search_fields = ("=도로명_주소", "^판매자__username")
+    raw_id_fields = ("생산자",)
+    search_fields = ("=도로명_주소", "^생산자__username")
     filter_horizontal = ("facilities",)
 
     def count_photos(self, obj):
