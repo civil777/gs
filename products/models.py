@@ -1,7 +1,7 @@
 from django.db import models
 from django_countries.fields import CountryField
 from core import models as core_models
-from users import models as user_models
+from django.urls import reverse
 
 
 class AbstractItem(core_models.TimeStampedModel):
@@ -65,7 +65,9 @@ class Product(core_models.TimeStampedModel):
     생산날짜 = models.TimeField()
     유통기한 = models.TimeField()
     # 판매자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    생산자 = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
+    생산자 = models.ForeignKey(
+        "user.User", related_name="products", on_delete=models.CASCADE
+    )
     # 제품_종류 = models.ManyToManyField(ProductType, blank=True)
     제품_종류 = models.ForeignKey(
         "ProductType",
@@ -78,6 +80,9 @@ class Product(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.제품이름
+
+    def get_absolute_url(self):
+        return reverse("products:detail", kwargs={"pk": self.pk})
 
     def total_rating(self):
         all_reviews = self.reviews.all()

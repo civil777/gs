@@ -11,12 +11,12 @@
     <h3>{{product.설명}}</h3>
 </div>
 <div>
-    <h2>By: {{product.host.username}}
+    <h2>By: {{product.생산자.username}}
         {% if product.생산자.무료배송 %}
         (무료배송)
         {% endif %}
     </h2>
-    <h3>Facilities</h3>
+    <h3>기타 사항</h3>
     <ul>
         {% for a in product.facilities.all  %}
         <li>{{a}}</li>
