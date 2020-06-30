@@ -5,12 +5,10 @@ from . import models
 
 class SearchForm(forms.Form):
 
-    도로명_주소 = forms.CharField(initial="Anywhere")
+    도로명_주소 = forms.CharField(required=False)
     국가 = CountryField(default="KR").formfield()
     product_type = forms.ModelChoiceField(
-        required=False,
-        empty_label="Any kind",
-        queryset=models.ProductType.objects.all(),
+        required=False, empty_label="제품 타입", queryset=models.ProductType.objects.all(),
     )
     가격 = forms.IntegerField(required=False)
     customer = forms.IntegerField(required=False)
