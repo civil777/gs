@@ -26,5 +26,21 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
-    list_display = ("username", "성별", "통화", "language", "할인_혜택_회원", "판매자")
+    list_display = (
+        "username",
+        "성별",
+        "통화",
+        "language",
+        "할인_혜택_회원",
+        "판매자",
+        "is_staff",
+        "is_superuser",
+        "email_verified",
+        "email_secret",
+        "login_method",
+        "email",
+        "is_active",
+        "first_name",
+        "last_name",
+    )
     list_filter = ("통화", "language", "할인_혜택_회원", "판매자")
