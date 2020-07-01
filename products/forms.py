@@ -5,6 +5,7 @@ from . import models
 
 class SearchForm(forms.Form):
 
+    제품이름 = forms.CharField(required=False)
     도로명_주소 = forms.CharField(required=False)
     국가 = CountryField(default="KR").formfield()
     product_type = forms.ModelChoiceField(

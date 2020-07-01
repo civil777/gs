@@ -28,14 +28,15 @@ class SearchView(View):
 
     def get(self, request):
 
-        country = request.GET.get("country")
+        제품이름 = request.GET.get("제품이름")
 
-        if country:
+        if 제품이름:
 
             form = forms.SearchForm(request.GET)
 
             if form.is_valid():
 
+                제품이름 = form.cleaned_data.get("제품이름")
                 city = form.cleaned_data.get("city")
                 country = form.cleaned_data.get("country")
                 product_type = form.cleaned_data.get("product_type")
@@ -47,46 +48,60 @@ class SearchView(View):
                 instant_book = form.cleaned_data.get("instant_book")
                 superhost = form.cleaned_data.get("superhost")
                 amenities = form.cleaned_data.get("amenities")
+
+                도로명_주소 = form.cleaned_data.get("도로명_주소")
+                국가 = form.cleaned_data.get("국가")
+                product_type = form.cleaned_data.get("product_type")
+                가격 = form.cleaned_data.get("가격")
+                customer = form.cleaned_data.get("customer")
+                남은수량 = form.cleaned_data.get("남은수량")
+                규격_및_중량 = form.cleaned_data.get("규격_및_중량")
+                할인_혜택_고객용_가격 = form.cleaned_data.get("할인_혜택_고객용_가격")
+                할인상품 = form.cleaned_data.get("할인상품")
+                무료배송 = form.cleaned_data.get("무료배송")
                 facilities = form.cleaned_data.get("facilities")
 
                 filter_args = {}
 
-                if city != "Anywhere":
-                    filter_args["city__startswith"] = city
+                # if city != "Anywhere":
+                #     filter_args["city__startswith"] = city
 
-                filter_args["country"] = country
+                # filter_args["country"] = country
+
+                if 가격 is not None:
+                    filiter_args["가격"] = 가격
 
                 if product_type is not None:
                     filter_args["product_type"] = product_type
 
                 if price is not None:
-                    filter_args["price__lte"] = price
+                    filter_args["가격__lte"] = 가격
 
-                if guests is not None:
-                    filter_args["guests__gte"] = guests
+                if customer is not None:
+                    filter_args["customer__gte"] = customer
 
-                if bedproducts is not None:
-                    filter_args["bedproducts__gte"] = bedproducts
+                if 남은수량 is not None:
+                    filter_args["남은수량__gte"] = 남은수량
 
-                if beds is not None:
-                    filter_args["beds__gte"] = beds
+                if 규격_및_중량 is not None:
+                    filter_args["규격_및_중량__gte"] = 규격_및_중량
 
-                if baths is not None:
-                    filter_args["baths__gte"] = baths
+                if 할인_혜택_고객용_가격 is not None:
+                    filter_args["할인_혜택_고객용_가격__gte"] = 할인_혜택_고객용_가격
 
-                if instant_book is True:
-                    filter_args["instant_book"] = True
+                if 무료배송 is True:
+                    filter_args["무료배송"] = True
 
-                if superhost is True:
-                    filter_args["host__superhost"] = True
+                if 할인상품 is True:
+                    filter_args["할인상품"] = True
 
-                for amenity in amenities:
-                    filter_args["amenities"] = amenity
+                # for amenity in amenities:
+                #     filter_args["amenities"] = amenity
 
                 for facility in facilities:
                     filter_args["facilities"] = facility
 
-                qs = models.Room.objects.filter(**filter_args).order_by("-created")
+                qs = models.Product.objects.filter(**filter_args).order_by("-생산날짜")
 
                 paginator = Paginator(qs, 10, orphans=5)
 
