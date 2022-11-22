@@ -9,7 +9,7 @@ black = "*"
 
 [packages]
 django = "==2.2.5"
-pillow = "==6.2.2"
+pillow = "==9.3.0"
 django-countries = "*"
 django-dotenv = "*"
 requests = "*"
